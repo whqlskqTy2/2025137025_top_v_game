@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Key
+  - Gate
+  - Monster
+  - player
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - wall
+  - Water
+  - UI
+  - Player
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: wall
+    uniqueID: 2268394867
+    locked: 0
+  - name: Player
+    uniqueID: 1131769893
+    locked: 0
+  - name: Ground
+    uniqueID: 3044955225
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
