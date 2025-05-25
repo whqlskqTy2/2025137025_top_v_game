@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 350293890}
   - component: {fileID: 350293889}
   - component: {fileID: 350293888}
+  - component: {fileID: 350293891}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -640,6 +641,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &350293891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350293887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abcaed09da456a459016de2834a1beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &626552820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1197,7 @@ GameObject:
   - component: {fileID: 1487603453}
   - component: {fileID: 1487603452}
   - component: {fileID: 1487603451}
+  - component: {fileID: 1487603454}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1303,6 +1317,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487603454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487603450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72442fe9dd8b18341a6e87e29f9584eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1727367763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1508,7 @@ GameObject:
   - component: {fileID: 2014373791}
   - component: {fileID: 2014373790}
   - component: {fileID: 2014373794}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1601,7 +1627,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

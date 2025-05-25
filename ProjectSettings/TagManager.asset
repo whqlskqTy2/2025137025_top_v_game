@@ -17,7 +17,7 @@ TagManager:
   - UI
   - Player
   - Ground
-  - 
+  - Monster
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1131769893
+    locked: 0
+  - name: Monster
+    uniqueID: 769628959
     locked: 0
   - name: Ground
     uniqueID: 3044955225

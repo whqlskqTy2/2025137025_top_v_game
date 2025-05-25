@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (KeyController.hasKey)
+            {
+                Debug.Log("문 통과!");
+                Destroy(gameObject); // 문 열림
+            }
+            else
+            {
+                Debug.Log("열쇠가 필요합니다.");
+                // 아무 일도 일어나지 않음
+            }
+        }
     }
 }

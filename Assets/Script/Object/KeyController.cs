@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class KeyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static bool hasKey = false; // ¿­¼è »óÅÂ ÀúÀå (Àü¿ª º¯¼ö)
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            hasKey = true;
+            Debug.Log("¿­¼è È¹µæ!");
+            Destroy(gameObject); // ¿­¼è »ç¶óÁü
+        }
     }
 }
