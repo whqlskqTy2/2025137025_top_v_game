@@ -8,6 +8,7 @@ TagManager:
   - Gate
   - Monster
   - player
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Player
   - Ground
   - Monster
-  - 
-  - 
+  - Enamy
+  - Projectile
   - 
   - 
   - 
@@ -56,4 +57,10 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enamy
+    uniqueID: 204472663
+    locked: 0
+  - name: Projectile
+    uniqueID: 3451911483
     locked: 0
