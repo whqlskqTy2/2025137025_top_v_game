@@ -8,16 +8,26 @@ public class MeleeAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public int damage = 1;
 
-    public float attackCooldown = 0.5f; // ?? ÄðÅ¸ÀÓ (ÃÊ)
+    public float attackCooldown = 0.5f; // ÄðÅ¸ÀÓ
     private float lastAttackTime = -999f;
+
+    private Animator animator;
+    private CooldownUIManager uiManager;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        uiManager = FindObjectOfType<CooldownUIManager>();
+    }
 
     void Update()
     {
-        // ÄðÅ¸ÀÓ Á¶°Ç Ãß°¡
         if (Input.GetKeyDown(KeyCode.Z) && Time.time >= lastAttackTime + attackCooldown)
         {
+            animator.SetTrigger("Attack");
             Attack();
             lastAttackTime = Time.time;
+            uiManager?.StartMeleeCooldown(attackCooldown);
         }
     }
 
@@ -45,4 +55,4 @@ public class MeleeAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-}
+} 
