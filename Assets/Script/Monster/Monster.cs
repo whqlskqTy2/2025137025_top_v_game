@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ public class Monster : MonoBehaviour
 {
     public int maxHP = 3;
     private int currentHP;
+
+    public int expReward = 5; // ëª¬ìŠ¤í„°ê°€ ì£½ì„ ë•Œ ì£¼ëŠ” ê²½í—˜ì¹˜
 
     void Start()
     {
@@ -15,7 +17,7 @@ public class Monster : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHP -= amount;
-        Debug.Log($"¸ó½ºÅÍ µ¥¹ÌÁö: -{amount}, ³²Àº Ã¼·Â: {currentHP}");
+        Debug.Log($"ëª¬ìŠ¤í„° ë°ë¯¸ì§€: -{amount}, ë‚¨ì€ ì²´ë ¥: {currentHP}");
 
         if (currentHP <= 0)
         {
@@ -25,10 +27,23 @@ public class Monster : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("¸ó½ºÅÍ Ã³Ä¡µÊ!");
+        Debug.Log("ëª¬ìŠ¤í„° ì²˜ì¹˜ë¨!");
+
+        // ğŸ†• ê²½í—˜ì¹˜ ì „ë‹¬
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            PlayerExp expSystem = playerObj.GetComponent<PlayerExp>();
+            if (expSystem != null)
+            {
+                expSystem.GainExp(expReward);
+            }
+        }
+
         Destroy(gameObject);
     }
-    // Ãæµ¹ °¨Áö 
+
+    // ì¶©ëŒ ê°ì§€
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

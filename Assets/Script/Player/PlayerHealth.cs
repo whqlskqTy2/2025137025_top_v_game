@@ -1,69 +1,83 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHP = 5;
-    private int currentHP;
+    public int currentHP;
 
+    [Header("UI ì—°ê²°")]
     public Slider hpSlider;
+    public TextMeshProUGUI hpText;
 
-    public float invincibleDuration = 1.5f;
-    private bool isInvincible = false;
-
-    private SpriteRenderer spriteRenderer;
+    [Header("ë¬´ë¤ í”„ë¦¬íŒ¹ ì—°ê²°")]
+    public GameObject gravePrefab; // ğŸ”¹Inspectorì—ì„œ í”„ë¦¬íŒ¹ ë“œë˜ê·¸ ì—°ê²°
 
     void Start()
     {
         currentHP = maxHP;
-        hpSlider.maxValue = maxHP;
-        hpSlider.value = currentHP;
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateHPUI();
     }
 
     public void TakeDamage(int amount)
     {
-        if (isInvincible) return;
-
         currentHP -= amount;
-        hpSlider.value = currentHP;
-        Debug.Log($"ÇÃ·¹ÀÌ¾î ÇÇ°İ! ³²Àº Ã¼·Â: {currentHP}");
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHPUI();
 
         if (currentHP <= 0)
         {
             Die();
         }
-        else
+    }
+
+    public void HealFull()
+    {
+        currentHP = maxHP;
+        UpdateHPUI();
+    }
+
+    public void UpdateHPUI()
+    {
+        if (hpSlider != null)
         {
-            StartCoroutine(Invincibility());
+            hpSlider.maxValue = maxHP;
+            hpSlider.value = currentHP;
+        }
+
+        if (hpText != null)
+        {
+            hpText.text = $"{currentHP} / {maxHP}";
         }
     }
 
     void Die()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î »ç¸Á!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        Debug.Log(" í”Œë ˆì´ì–´ ì‚¬ë§!");
 
-    IEnumerator Invincibility()
-    {
-        isInvincible = true;
-
-        // ±ôºıÀÓ È¿°ú
-        float elapsed = 0f;
-        while (elapsed < invincibleDuration)
+        PlayerExp exp = GetComponent<PlayerExp>();
+        int lostExp = 0;
+        if (exp != null)
         {
-            spriteRenderer.color = new Color(1, 1, 1, 0.3f); // ¹İÅõ¸í
-            yield return new WaitForSeconds(0.1f);
-            spriteRenderer.color = new Color(1, 1, 1, 1f); // ¿ø·¡´ë·Î
-            yield return new WaitForSeconds(0.1f);
-            elapsed += 0.2f;
+            lostExp = exp.currentExp;
+            exp.currentExp = 0;
+            exp.UpdateUI();
         }
 
-        isInvincible = false;
+        // ë¬´ë¤ ìƒì„±
+        if (gravePrefab != null)
+        {
+            GameObject grave = Instantiate(gravePrefab, transform.position, Quaternion.identity);
+            grave.GetComponent<Grave>().storedExp = lostExp;
+        }
+
+        //  í”Œë ˆì´ì–´ë¥¼ ì£½ì´ëŠ” ëŒ€ì‹  ë¦¬ìŠ¤í° ìœ„ì¹˜ë¡œ ì´ë™
+        transform.position = new Vector3(0, 0, 0); // ì˜ˆ: ì‹œì‘ ìœ„ì¹˜ë¡œ
+        HealFull(); // ì²´ë ¥ íšŒë³µ
     }
+
 }

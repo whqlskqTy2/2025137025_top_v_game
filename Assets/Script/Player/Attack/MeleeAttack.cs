@@ -8,6 +8,8 @@ public class MeleeAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public int damage = 1;
 
+    public int attackDamage = 1;
+
     public float attackCooldown = 0.5f; // ÄğÅ¸ÀÓ
     private float lastAttackTime = -999f;
 
