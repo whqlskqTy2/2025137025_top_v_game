@@ -309,7 +309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -818.3018, y: 311.41083}
+  m_AnchoredPosition: {x: -818.3018, y: 286}
   m_SizeDelta: {x: 223.0609, y: 31.3892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &107021056
@@ -435,7 +435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -266, y: 497.99}
+  m_AnchoredPosition: {x: -481, y: 430}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180438873
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -16.91211, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10227,7 +10227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -814.11945, y: 405.57855}
+  m_AnchoredPosition: {x: -814.11945, y: 355}
   m_SizeDelta: {x: 223.0609, y: 31.3892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &906909889
@@ -10600,7 +10600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -336, y: 446}
+  m_AnchoredPosition: {x: -768, y: 431}
   m_SizeDelta: {x: 325.4, y: 59.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255946519
@@ -11069,6 +11069,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   damage: 1
+  attackDamage: 1
   attackCooldown: 1.5
 --- !u!114 &1727367771
 MonoBehaviour:
@@ -11098,8 +11099,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  currentHP: 0
   hpSlider: {fileID: 304354517}
-  invincibleDuration: 1.5
+  hpText: {fileID: 0}
+  gravePrefab: {fileID: 0}
 --- !u!95 &1727367773
 Animator:
   serializedVersion: 5
@@ -11136,6 +11139,8 @@ MonoBehaviour:
   level: 1
   currentExp: 0
   expToNextLevel: 10
+  hpIncreasePerLevel: 2
+  attackIncreasePerLevel: 1
   levelText: {fileID: 180438873}
   expSlider: {fileID: 1255946521}
   expText: {fileID: 483569562}
