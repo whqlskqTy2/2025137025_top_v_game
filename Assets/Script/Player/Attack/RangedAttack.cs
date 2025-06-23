@@ -9,8 +9,6 @@ public class RangedAttack : MonoBehaviour
     public float attackCooldown = 0.5f;
 
     private float lastAttackTime = -999f;
-
-    //  추가: UI 연동용 변수
     private CooldownUIManager uiManager;
 
     void Start()
@@ -20,12 +18,11 @@ public class RangedAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && Time.time >= lastAttackTime + attackCooldown)
+        // 좌클릭으로 발사
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
         {
             Shoot();
             lastAttackTime = Time.time;
-
-            //  추가: UI 쿨타임 바 실행
             uiManager?.StartRangedCooldown(attackCooldown);
         }
     }

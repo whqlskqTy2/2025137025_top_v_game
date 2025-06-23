@@ -50,7 +50,7 @@ public class PlayerExp : MonoBehaviour
         level++;
         expToNextLevel += 5;
 
-        Debug.Log($"🌟 레벨 업! 현재 레벨: {level}");
+        Debug.Log($" 레벨 업! 현재 레벨: {level}");
 
         if (playerHealth != null)
         {

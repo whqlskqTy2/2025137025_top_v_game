@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class MeleeAttack : MonoBehaviour
 {
     public float attackRange = 1.5f;
@@ -24,7 +28,8 @@ public class MeleeAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && Time.time >= lastAttackTime + attackCooldown)
+        // 마우스 우클릭으로 공격
+        if (Input.GetMouseButtonDown(1) && Time.time >= lastAttackTime + attackCooldown)
         {
             animator.SetTrigger("Attack");
             Attack();
@@ -57,4 +62,4 @@ public class MeleeAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-} 
+}

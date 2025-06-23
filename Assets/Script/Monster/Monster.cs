@@ -7,11 +7,21 @@ public class Monster : MonoBehaviour
     public int maxHP = 3;
     private int currentHP;
 
-    public int expReward = 5; // 몬스터가 죽을 때 주는 경험치
+    public int expReward = 5;
+
+    private RoomManager roomManager;
 
     void Start()
     {
         currentHP = maxHP;
+
+        //  자동으로 RoomManager 찾기
+        roomManager = FindObjectOfType<RoomManager>();
+
+        if (roomManager == null)
+        {
+            Debug.LogWarning($" {gameObject.name}: RoomManager가 씬에서 발견되지 않았습니다.");
+        }
     }
 
     public void TakeDamage(int amount)
@@ -29,7 +39,7 @@ public class Monster : MonoBehaviour
     {
         Debug.Log("몬스터 처치됨!");
 
-        // 🆕 경험치 전달
+        // ✅ 경험치 획득
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -40,10 +50,20 @@ public class Monster : MonoBehaviour
             }
         }
 
+        // ✅ RoomManager에 몬스터 사망 보고
+        if (roomManager != null)
+        {
+            roomManager.NotifyMonsterDeath();
+            Debug.Log(" RoomManager에게 몬스터 사망 보고 완료");
+        }
+        else
+        {
+            Debug.LogWarning(" RoomManager가 연결되어 있지 않아 문이 열리지 않습니다!");
+        }
+
         Destroy(gameObject);
     }
 
-    // 충돌 감지
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -56,3 +76,5 @@ public class Monster : MonoBehaviour
         }
     }
 }
+
+
