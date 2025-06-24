@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public TextMeshProUGUI hpText;
 
     [Header("무덤 프리팹 연결")]
-    public GameObject gravePrefab; // 🔹Inspector에서 프리팹 드래그 연결
+    public GameObject gravePrefab;
 
     void Start()
     {
@@ -64,8 +64,15 @@ public class PlayerHealth : MonoBehaviour
         if (exp != null)
         {
             lostExp = exp.currentExp;
+
+            // 레벨과 경험치 초기화
             exp.currentExp = 0;
-            exp.UpdateUI();
+            exp.level = 1;
+
+            // 오류 발생 줄 제거됨
+            // exp.attackPower = 1;
+
+            exp.UpdateUI(); // UI 갱신
         }
 
         // 무덤 생성
@@ -75,9 +82,12 @@ public class PlayerHealth : MonoBehaviour
             grave.GetComponent<Grave>().storedExp = lostExp;
         }
 
-        //  플레이어를 죽이는 대신 리스폰 위치로 이동
-        transform.position = new Vector3(0, 0, 0); // 예: 시작 위치로
-        HealFull(); // 체력 회복
-    }
+        // 체력 초기화
+        maxHP = 5;
+        currentHP = maxHP;
+        UpdateHPUI();
 
+        // 리스폰 위치로 이동
+        transform.position = new Vector3(0, 0, 0); // 원하는 위치로 변경
+    }
 }

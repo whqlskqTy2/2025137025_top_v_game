@@ -8,14 +8,13 @@ public class Monster : MonoBehaviour
     private int currentHP;
 
     public int expReward = 5;
+    public GameObject keyPrefab; // 🔑 열쇠 프리팹
 
     private RoomManager roomManager;
 
     void Start()
     {
         currentHP = maxHP;
-
-        //  자동으로 RoomManager 찾기
         roomManager = FindObjectOfType<RoomManager>();
 
         if (roomManager == null)
@@ -38,6 +37,12 @@ public class Monster : MonoBehaviour
     void Die()
     {
         Debug.Log("몬스터 처치됨!");
+
+        // 🔑 열쇠 생성
+        if (keyPrefab != null)
+        {
+            Instantiate(keyPrefab, transform.position, Quaternion.identity);
+        }
 
         // ✅ 경험치 획득
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -76,5 +81,3 @@ public class Monster : MonoBehaviour
         }
     }
 }
-
-

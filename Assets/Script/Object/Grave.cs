@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Grave : MonoBehaviour
 {
-    public int storedExp = 0;
+    public int storedExp = 0; // 저장된 경험치
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerExp exp = other.GetComponent<PlayerExp>();
             if (exp != null)
             {
-                exp.GainExp(storedExp);
-                Debug.Log($" 무덤에서 경험치 {storedExp} 회수!");
+                int recovered = Mathf.FloorToInt(storedExp * 0.3f);
+                exp.GainExp(recovered);
+                Debug.Log($"무덤에서 경험치 {recovered} 회수!");
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject); // 무덤 사라짐
         }
     }
 }

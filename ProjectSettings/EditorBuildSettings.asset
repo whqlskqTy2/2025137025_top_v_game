@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TopV.unity
     guid: 876f98676acaf964bbfb68a794c54591
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: acdacb6f0ec298b4aae7a169fdcd55cf
   m_configObjects: {}
