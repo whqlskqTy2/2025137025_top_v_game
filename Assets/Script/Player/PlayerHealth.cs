@@ -17,14 +17,22 @@ public class PlayerHealth : MonoBehaviour
     [Header("무덤 프리팹 연결")]
     public GameObject gravePrefab;
 
+    [Header("무적 관련")]
+    public float invincibleTime = 0.5f;
+    private bool isInvincible = false;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         currentHP = maxHP;
         UpdateHPUI();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(int amount)
     {
+        if (isInvincible) return; // 무적이면 데미지 무시
+
         currentHP -= amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateHPUI();
@@ -33,6 +41,29 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            StartCoroutine(InvincibilityCoroutine());
+        }
+    }
+
+    IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true;
+
+        float blinkInterval = 0.1f;
+        float elapsed = 0f;
+
+        while (elapsed < invincibleTime)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkInterval / 2f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkInterval / 2f);
+            elapsed += blinkInterval;
+        }
+
+        isInvincible = false;
     }
 
     public void HealFull()
@@ -57,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log(" 플레이어 사망!");
+        Debug.Log("플레이어 사망!");
 
         PlayerExp exp = GetComponent<PlayerExp>();
         int lostExp = 0;
@@ -65,29 +96,22 @@ public class PlayerHealth : MonoBehaviour
         {
             lostExp = exp.currentExp;
 
-            // 레벨과 경험치 초기화
             exp.currentExp = 0;
             exp.level = 1;
 
-            // 오류 발생 줄 제거됨
-            // exp.attackPower = 1;
-
-            exp.UpdateUI(); // UI 갱신
+            exp.UpdateUI();
         }
 
-        // 무덤 생성
         if (gravePrefab != null)
         {
             GameObject grave = Instantiate(gravePrefab, transform.position, Quaternion.identity);
             grave.GetComponent<Grave>().storedExp = lostExp;
         }
 
-        // 체력 초기화
         maxHP = 5;
         currentHP = maxHP;
         UpdateHPUI();
 
-        // 리스폰 위치로 이동
-        transform.position = new Vector3(0, 0, 0); // 원하는 위치로 변경
+        transform.position = new Vector3(0, 0, 0);
     }
 }
